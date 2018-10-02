@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="node_modules/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <!-- <link href="css/animate.css" rel="stylesheet"> -->
+    <title>待定</title>
+</head>
+
+<body>
+    <div id="app">
+
+
+        <!-- nav -->
+        <nav v-bind:class="{'nav_default':!Nav_fixed,'nav_default_fiexd':Nav_fixed}">
+            <div class="Nav_Logo">
+                <i class="el-icon-loading"></i><span>Logo 标题</span>
+            </div>
+            <el-menu :default-active="Nav_index" class="Nav_val" mode="horizontal" text-color="#fff" active-text-color="#fff"
+                @select="handleSelect">
+                <el-menu-item index="1"><a href="#">首页</a></el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">关于协会</template>
+                    <el-menu-item index="2-1">协会介绍与宗旨</el-menu-item>
+                    <el-menu-item index="2-2">协会成员</el-menu-item>
+                    <el-menu-item index="2-3">协会成立背景与发展</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3"><a href="#">协会动态</a></el-menu-item>
+                <el-menu-item index="4"><a href="#">会员</a></el-menu-item>
+                <el-menu-item index="5"><a href="#">合作项目</a></el-menu-item>
+                <el-menu-item index="6"><a href="#">联系我们</a></el-menu-item>
+            </el-menu>
+        </nav>
+        <!-- nav -->
+        <div class="banner">
+            <div class="desc_wapper"></div>
+            <figure class="banner_box">
+                <img src="images/top.jpg">
+            </figure>
+
+            <div class="desc_content slidelnUp animate">
+                <h1>协会宗旨</h1>
+                <h2>共享、共生和共赢</h2>
+                <el-button plain>more</el-button>
+            </div>
+        </div>
+        <!-- content -->
+        <el-card>
+            <el-row class="content">
+                <el-col :span="12" class="">
+                    <el-container>
+                        <el-header>
+                            <h1>协会介绍与宗旨</h1>
+                        </el-header>
+                        <el-main style="overflow:hidden">
+                            <span>加亚经济文化协会是加拿大和中国及亚洲新兴市场进行经济文化交流的非营利性机构。
+                                其宗旨是为加亚各国的经济文化交流与合作搭建桥梁，为亚洲资源在北美自我展示提供平台，
+                                为推动加拿大经济及多元文化发展对接资源进而实现加拿大与亚洲的经济文化的更高层次上的有
+                                机融合与互补达到和谐、共享、共生和共赢的目的。
+                            </span>
+                        </el-main>
+                        <el-footer>
+                            <el-button>More</el-button>
+                        </el-footer>
+                    </el-container>
+                </el-col>
+                <el-col :span="12" class="img">
+                    <img src="images/centent1.png">
+                </el-col>
+            </el-row>
+        </el-card>
+        <!-- content -->
+        <!-- 发布文章鸭 什么案例啊  -->
+        <el-row :class="{'project':true,'showUp':Project_animation}">
+            <!-- <el-col :span="8" class="card">
+                <el-card shadow="hover">
+                    <el-container>
+                        <el-header>
+                            <img src="images/project1.png">
+                        </el-header>
+                        <el-main>
+                            <h1>协会成立案例</h1>
+                            <span>加拿大的经济文化艺术产业在国际上取得了非凡成就。仅就文化产业本身已成为加拿大经济的重要驱动引擎
+                                加拿大的经济文化艺术产业在国际上取得了非凡成就</span>
+                        </el-main>
+                        <el-footer>
+                            <el-row>
+                                <el-col :span="12">
+                                    <p style="padding: 10px 0 10px 0;">2018-10-1</p>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-button><a href="#">More</a></el-button>
+                                </el-col>
+                            </el-row>
+                        </el-footer>
+                    </el-container>
+                </el-card>
+            </el-col> -->
+
+            <el-col :span="8" class="card" v-for="item in pojects">
+                <el-card shadow="hover">
+                    <el-container>
+                        <el-header>
+                            <img :src="item.img_url">
+                        </el-header>
+                        <el-main>
+                            <h1>{{item.title_name}}</h1>
+                            <span>{{item.content}}</span>
+                        </el-main>
+                        <el-footer>
+                            <el-row>
+                                <el-col :span="12">
+                                    <p style="padding: 10px 0 10px 0;">{{item.data}}</p>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-button><a :href="item.href">More</a></el-button>
+                                </el-col>
+                            </el-row>
+                        </el-footer>
+                    </el-container>
+                </el-card>
+            </el-col>
+
+        </el-row>
+        <!-- 发布文章鸭 什么案例啊  -->
+
+
+        <div class="footer">
+            <span class="phone-some">
+                <el-popover placement="top-start" width="200" tigger="hover">
+                    电话:12313123<br>
+                    座机电话：129381203
+                    <el-button slot="reference"><i class="el-icon-phone"></i>联系方式</el-button>
+                </el-popover>
+                <el-popover placement="bottom" title="联系方式" width="200" tigger="hover">
+                    地点:广州市北京路大佛寺最高处<br>
+                    邮箱：51000
+                    <el-button slot="reference"><i class="el-icon-location"></i>总部位置</el-button>
+                </el-popover>
+                <el-popover placement="top-end" title="联系方式" width="200" tigger="hover">
+                    邮箱:12313123<br>
+                    座机电话：129381203
+                    <el-button slot="reference"><i class="el-icon-message"></i>邮箱</el-button>
+                </el-popover>
+
+            </span>
+        </br>
+
+            Copyright @ 2018 广州市电子信息微网站工作室
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/element-ui/lib/index.js"></script>
+<script src="app/app.js"></script>
+
+</html>
